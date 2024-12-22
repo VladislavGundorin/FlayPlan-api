@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.example.dtos.FlightPlanDTO;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
@@ -26,7 +27,7 @@ public interface FlightPlanApi {
 
     @PostMapping("/create")
     @Operation(summary = "Creates a new FlightPlan.")
-    ResponseEntity<EntityModel<FlightPlanDTO>> createFlightPlan(@RequestBody FlightPlanDTO flightPlanDTO);
+    ResponseEntity<EntityModel<FlightPlanDTO>> createFlightPlan(@RequestBody @Valid FlightPlanDTO flightPlanDTO);
 
     @GetMapping("/{id}")
     @Operation(summary = "Fetches FlightPlan by ID.")
@@ -38,7 +39,7 @@ public interface FlightPlanApi {
 
     @PutMapping("/{id}")
     @Operation(summary = "Updates FlightPlan by ID.")
-    ResponseEntity<EntityModel<FlightPlanDTO>> updateFlightPlan(@PathVariable UUID id, @RequestBody FlightPlanDTO flightPlanDTO);
+    ResponseEntity<EntityModel<FlightPlanDTO>> updateFlightPlan(@PathVariable UUID id, @RequestBody @Valid FlightPlanDTO flightPlanDTO);
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Deletes FlightPlan by ID.")

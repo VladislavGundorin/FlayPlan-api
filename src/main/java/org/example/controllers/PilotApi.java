@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.example.dtos.PilotDTO;
 import org.springframework.hateoas.EntityModel;
 import org.springframework.hateoas.RepresentationModel;
@@ -26,11 +27,11 @@ public interface PilotApi {
 
     @PostMapping
     @Operation(summary = "Create a new pilot", description = "Creates a new pilot and returns the created resource with links.")
-    ResponseEntity<EntityModel<PilotDTO>> createPilot(@RequestBody PilotDTO pilotDTO);
+    ResponseEntity<EntityModel<PilotDTO>> createPilot(@RequestBody @Valid PilotDTO pilotDTO);
 
     @GetMapping("/{id}")
     @Operation(summary = "Get pilot by ID", description = "Fetches a specific pilot by its unique ID.")
-    ResponseEntity<EntityModel<PilotDTO>> getPilot(@PathVariable UUID id);
+    ResponseEntity<EntityModel<PilotDTO>> getPilot(@PathVariable @Valid UUID id);
 
     @GetMapping
     @Operation(summary = "Get all pilots", description = "Retrieves a collection of all available pilots.")
@@ -38,7 +39,7 @@ public interface PilotApi {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update a pilot", description = "Updates the details of an existing pilot by its ID.")
-    ResponseEntity<EntityModel<PilotDTO>> updatePilot(@PathVariable UUID id, @RequestBody PilotDTO pilotDTO);
+    ResponseEntity<EntityModel<PilotDTO>> updatePilot(@PathVariable UUID id, @RequestBody @Valid PilotDTO pilotDTO);
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete a pilot", description = "Deletes a pilot by its unique ID.")

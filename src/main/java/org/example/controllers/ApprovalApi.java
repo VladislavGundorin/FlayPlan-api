@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.example.dtos.ApprovalDTO;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -26,7 +27,7 @@ public interface ApprovalApi {
 
     @PostMapping
     @Operation(summary = "Create a new Approval")
-    ResponseEntity<EntityModel<ApprovalDTO>> createApproval(@RequestBody ApprovalDTO approvalDTO);
+    ResponseEntity<EntityModel<ApprovalDTO>> createApproval(@RequestBody @Valid ApprovalDTO approvalDTO);
 
     @GetMapping
     @Operation(summary = "Get a list of all Approval")
@@ -38,7 +39,7 @@ public interface ApprovalApi {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update Approval by ID")
-    ResponseEntity<EntityModel<ApprovalDTO>> updateApproval(@PathVariable UUID id, @RequestBody ApprovalDTO approvalDTO);
+    ResponseEntity<EntityModel<ApprovalDTO>> updateApproval(@PathVariable UUID id, @RequestBody @Valid ApprovalDTO approvalDTO);
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete Approval by ID")

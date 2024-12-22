@@ -3,6 +3,8 @@ package org.example.dtos;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import io.swagger.v3.oas.annotations.media.Schema;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
 import org.example.dtos.enums.ApprovalStatus;
 
 
@@ -12,12 +14,17 @@ import java.util.UUID;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class ApprovalDTO {
     private UUID id;
+    @NotNull(message = "Идентификатор авторизации не может быть пустым")
     private UUID authorityId;
+    @NotNull(message = "Статус не может быть нулевым")
     private ApprovalStatus status;
+    @NotNull(message = "Одобрено не может быть нулевым")
+    @Size(min = 1, max = 100, message = "Одобрено должно содержать от 1 до 100 символов")
     private String approvedBy;
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss.SSSSSS")
     private LocalDateTime approvedAt;
+    @Size(max = 500, message = "Объем комментариев не должен превышать 500 символов")
     private String comments;
 
     public ApprovalDTO(UUID id, UUID authorityId, ApprovalStatus status, String approvedBy, LocalDateTime approvedAt, String comments) {

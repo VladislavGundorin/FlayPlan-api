@@ -5,6 +5,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import jakarta.validation.Valid;
 import org.example.dtos.AirspaceAuthorityDTO;
 import org.springframework.hateoas.CollectionModel;
 import org.springframework.hateoas.EntityModel;
@@ -24,7 +25,7 @@ public interface AirspaceAuthorityApi {
 
     @PostMapping
     @Operation(summary = "Create a new AirspaceAuthority")
-    ResponseEntity<EntityModel<AirspaceAuthorityDTO>> createAirspaceAuthority(@RequestBody AirspaceAuthorityDTO airspaceAuthorityDTO);
+    ResponseEntity<EntityModel<AirspaceAuthorityDTO>> createAirspaceAuthority(@RequestBody @Valid AirspaceAuthorityDTO airspaceAuthorityDTO);
 
     @GetMapping("/{id}")
     @Operation(summary = "Get AirspaceAuthority by ID")
@@ -36,7 +37,7 @@ public interface AirspaceAuthorityApi {
 
     @PutMapping("/{id}")
     @Operation(summary = "Update AirspaceAuthority by ID")
-    ResponseEntity<EntityModel<AirspaceAuthorityDTO>> updateAirspaceAuthority(@PathVariable UUID id, @RequestBody AirspaceAuthorityDTO airspaceAuthorityDTO);
+    ResponseEntity<EntityModel<AirspaceAuthorityDTO>> updateAirspaceAuthority(@PathVariable UUID id, @RequestBody @Valid AirspaceAuthorityDTO airspaceAuthorityDTO);
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Delete AirspaceAuthority by ID")
